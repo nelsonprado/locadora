@@ -1,0 +1,28 @@
+<h1>Listagem de Sócios</h1>
+
+<table border=1 cellpadding=5>
+  <tr>
+    <th>Nome</th>
+    <th>Endereço</th>
+    <th>Telefone</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @partners.each do |partner| %>
+  <tr>
+    <td><%= partner.name %></td>
+    <td><%= partner.address %></td>
+    <td><%= partner.fone %></td>
+    <td><%= link_to 'Mostrar', partner %></td>
+    <td><%= link_to 'Editar', edit_partner_path(partner) %></td>
+    <td><%= link_to 'Apagar', partner, confirm: 'Tem certeza?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Filmes', movies_path %>
+<%= link_to 'Novo Sócio', new_partner_path %>

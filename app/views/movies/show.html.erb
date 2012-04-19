@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to image_tag("movie_#{@movie.id}.jpg", :size => "220x310"), edit_movie_path(@movie) %>
+
+<p>
+  <b>Título:</b>
+  <%= @movie.title %>
+</p>
+
+<p>
+  <b>Classificação:</b>
+  <%= @movie.classification %>
+</p>
+
+<p>
+  <b>Quantidade:</b>
+  <%= @movie.quantity %>
+</p>
+
+<%= link_to 'Editar', edit_movie_path(@movie) %> |
+<%= link_to 'Voltar', movies_path %>

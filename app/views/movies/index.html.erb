@@ -1,0 +1,47 @@
+<h1>Listagem de Filmes</h1>
+
+<% if partner_signed_in? %>
+  <li>
+  <%= link_to('Logout', destroy_partner_session_path, :method => :delete) %>        
+  </li>
+  <%= link_to 'Editar usuário', edit_partner_path(current_partner) %>
+<% else %>
+  <li>
+  <%= link_to('Login', new_partner_session_path)  %>  
+  </li>
+<% end %>
+
+<table border=1 cellpadding=5>
+  <tr>
+    <th>Capa</th>
+    <th>Título</th>
+    <th>Classificação</th>    
+    <th>Alugar</th>
+    <th>Qtd.</th>
+    <hr />
+  </tr>
+
+<% @movies.each do |movie| %>
+  <tr>
+    <td><%= link_to image_tag("movie_#{movie.id}.jpg", :size => "130x170"), movie %></td>
+    <td><%= movie.title %></td>
+    <td><%= movie.classification %></td>
+    <td><% if partner_signed_in? %>            
+          <%= link_to('Alugar',rents_path) %>
+          <% else %>
+          <%= link_to('Alugar', new_partner_session_path)  %>
+        <% end %>
+    </td>
+    <td><%= movie.quantity %></td>
+    <% if current_partner.try(:admin?) %> 
+      <td><%= link_to 'Editar', edit_movie_path(movie) %></td>
+      <td><%= link_to 'Apagar', movie, confirm: 'Tem certeza?', method: :delete %></td>
+    <% end %>
+  </tr>  
+<% end %>
+</table>
+<hr />
+
+<% if current_partner.try(:admin?) %>
+  <%= link_to '=> Cadastrar novo filme <=', new_movie_path %>
+<% end %>

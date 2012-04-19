@@ -1,0 +1,35 @@
+<h1>Alugar</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<p>
+  <b>Nome:</b>
+  <%= current_partner.name %>
+</p>
+<p>
+  <b>email:</b>
+  <%= current_partner.email %>
+</p>
+
+<p>
+  <b>Título:</b>
+  <%= @movie.title %>
+</p>
+
+<% @rents.each do |rent| %>
+  <tr>
+    <td><%= link_to 'Show', rent %></td>
+    <td><%= link_to 'Edit', edit_rent_path(rent) %></td>
+    <td><%= link_to 'Retirar', rent, confirm: 'Deseja excluir este filme?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Alugar mais filmes', movies_path %>
