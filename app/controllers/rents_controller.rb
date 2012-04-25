@@ -25,7 +25,12 @@ class RentsController < ApplicationController
   # GET /rents/new
   # GET /rents/new.json
   def new
+    if session[:movie_to_rent] == nil
+      session[:movie_to_rent] = []
+    end
+    session[:movie_to_rent] << (params[:movie_id])
     @rent = Rent.new
+    @movies = Movie.find(session[:movie_to_rent])    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -72,7 +77,7 @@ class RentsController < ApplicationController
 
   # DELETE /rents/1
   # DELETE /rents/1.json
-  def destroy
+  def destroy    
     @rent = Rent.find(params[:id])
     @rent.destroy
 

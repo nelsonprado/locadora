@@ -80,4 +80,22 @@ class MoviesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def add_new_copy
+    @movie = Movie.find(params[:id])
+    @movie.add_copy
+    redirect_to movies_path
+  end
+
+  def destroy_movie_rent
+    @movie = Movie.find(session[:movie_to_rent])
+
+    session[:movie_to_rent].delete(params[:id])
+    if @movie.count <= 1
+      redirect_to movies_path
+    else
+      redirect_to new_rent_path
+    end
+  end
+
 end

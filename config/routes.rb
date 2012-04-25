@@ -1,5 +1,7 @@
 Locadora::Application.routes.draw do
 
+  resources :copies
+
   resources :rents
 
   devise_for :partners
@@ -8,7 +10,12 @@ Locadora::Application.routes.draw do
 
   resources :partners
 
-  resources :movies
+  resources :movies do
+    member do
+      get 'add_new_copy'
+      get 'destroy_movie_rent'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
